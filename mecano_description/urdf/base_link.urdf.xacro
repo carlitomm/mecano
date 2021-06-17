@@ -1,0 +1,169 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="mecano" name="base_link">
+
+    <xacro:macro name="foots_shape">
+        <box size="0.216 0.075 0.038" />
+    </xacro:macro>
+
+    <xacro:macro name="column_shape">
+        <box size="0.037 0.005 0.048" />
+    </xacro:macro>
+
+    <xacro:macro name="base_link">
+        <link name="base_link">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.01 0.04 0.01" />
+                </geometry>
+                <material name="blue" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.01 0.04 0.01" />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.01" />
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+
+        <link name="front_link">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.01 0.04 0.01" />
+                </geometry>
+                <material name="blue" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.01 0.04 0.01" />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.01" />
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+
+        <joint name="front_link_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="front_link" />
+            <origin rpy="0 0 0" xyz="0.1 0.0 0.0" />
+        </joint>
+
+        <link name="left_foot">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <xacro:foots_shape />
+                </geometry>
+                <material name="grey" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <xacro:foots_shape />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.4" />
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+
+        <joint name="left_foot_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="left_foot" />
+            <origin rpy="0 0 0" xyz="0 0.0575 0.0" />
+        </joint>
+
+        <link name="right_foot">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <xacro:foots_shape />
+                </geometry>
+                <material name="grey" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <xacro:foots_shape />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.4" />
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+
+        <joint name="right_foot_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="right_foot" />
+            <origin rpy="0 0 0" xyz="0 -0.0575 0.0" />
+        </joint>
+
+
+        <link name="left_back_column">
+                <visual>
+                    <xacro:default_origin />
+                    <geometry>
+                        <xacro:column_shape />
+                    </geometry>
+                    <material name="blue" />
+                </visual>
+                <collision>
+                    <xacro:default_origin />
+                    <geometry>
+                        <xacro:column_shape />
+                    </geometry>
+                </collision>
+                <inertial>
+                    <xacro:default_origin />
+                    <mass value="0.4" />
+                    <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+                </inertial>
+            </link>
+            <joint name="left_back_column_joint" type="fixed">
+                    <parent link="left_foot" />
+                    <child link="left_back_column" />
+                    <origin rpy="0 0 0" xyz="-0.070 0.03  0.035" />
+                </joint>
+            
+                <link name="right_back_column">
+                        <visual>
+                            <xacro:default_origin />
+                            <geometry>
+                                <xacro:column_shape />
+                            </geometry>
+                            <material name="blue" />
+                        </visual>
+                        <collision>
+                            <xacro:default_origin />
+                            <geometry>
+                                <xacro:column_shape />
+                            </geometry>
+                        </collision>
+                        <inertial>
+                            <xacro:default_origin />
+                            <mass value="0.4" />
+                            <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+                        </inertial>
+                    </link>
+                    <joint name="right_back_column_joint" type="fixed">
+                            <parent link="right_foot" />
+                            <child link="right_back_column" />
+                            <origin rpy="0 0 0" xyz="-0.070 -0.03  0.035" />
+                        </joint>
+
+    </xacro:macro>
+</robot>

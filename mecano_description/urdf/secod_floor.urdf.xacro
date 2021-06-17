@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="mecano" name="second_floor">
+
+    <xacro:macro name="second_floor">
+        <link name="second_floor">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.18 0.151 0.004" />
+                </geometry>
+                <material name="white" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.001 0.001 0.004" />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.03" />
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+
+        <joint name="second_floor_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="second_floor" />
+            <origin rpy="0 0 0" xyz="0.012 0.0 0.060" />
+        </joint>
+
+        <link name="second_floor_front">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.05 0.195 0.0116" />
+                </geometry>
+                <material name="white" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.001 0.001 0.004" />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.03"/>
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+
+        <joint name="second_floor_front_joint" type="fixed">
+            <parent link="second_floor" />
+            <child link="second_floor_front" />
+            <origin rpy="0 0 0" xyz="0.07 0.0 -0.0039" />
+        </joint>
+
+        <link name="second_floor_back">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.05 0.185 0.0116" />
+                </geometry>
+                <material name="white" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <box size="0.001 0.001 0.004" />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.03" />
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+
+        <joint name="second_floor_back_joint" type="fixed">
+            <parent link="second_floor" />
+            <child link="second_floor_back" />
+            <origin rpy="0 0 0" xyz="-0.085 0.0 -0.0039" />
+        </joint>
+
+        <link name="second_floor_column_right">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <xacro:column_shape />
+                </geometry>
+                <material name="blue" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <xacro:column_shape />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.4" />
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+
+        <joint name="second_floor_column_right_joint" type="fixed">
+            <parent link="second_floor" />
+            <child link="second_floor_column_right" />
+            <origin rpy="0 0 0" xyz="0.070 -0.09  -0.028" />
+        </joint>
+
+        <link name="second_floor_column_left">
+            <visual>
+                <xacro:default_origin />
+                <geometry>
+                    <xacro:column_shape />
+                </geometry>
+                <material name="blue" />
+            </visual>
+            <collision>
+                <xacro:default_origin />
+                <geometry>
+                    <xacro:column_shape />
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:default_origin />
+                <mass value="0.4" />
+                <inertia ixx="0.00304666666667" ixy="0.0" ixz="0.0" iyy="0.00251333333333" iyz="0.0" izz="0.00534666666667" />
+            </inertial>
+        </link>
+        <joint name="second_floor_column_lrft_joint" type="fixed">
+            <parent link="second_floor" />
+            <child link="second_floor_column_left" />
+            <origin rpy="0 0 0" xyz="0.070 0.09  -0.028" />
+        </joint>
+    </xacro:macro>
+    #END OF material definition
+</robot>

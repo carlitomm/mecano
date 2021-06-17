@@ -1,0 +1,29 @@
+<launch>
+    <node 
+    pkg="mecano_navigation" 
+    type="high_level_planner.py" 
+    name="high_level_planner" 
+    output="screen"></node>
+
+    <node 
+    pkg="mecano_navigation" 
+    type="low_level_navigation.py" 
+    name="low_level_navigation" 
+    output="screen"></node>
+
+    <arg name="map_file" default="/home/carlos/catkin_ws/src/maps/maps/myRoom.yaml"/>
+    
+    <node 
+    pkg="map_server" 
+    type="map_server" 
+    name="map_server"
+    args = "$(arg map_file)" 
+    output="screen"></node>
+
+    <include file="$(find mecano_description)/launch/display.launch"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" 
+    args="0 0 0 0 0 0 map odom 100">
+    </node>
+    
+</launch>

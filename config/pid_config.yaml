@@ -1,0 +1,7 @@
+mecano/gazebo_ros_control/pid_gains:
+  joint1: {p: 100, i: 0.01, d: 10.0}
+  joint2: {p: 100, i: 0.01, d: 10.0}
+  joint3: {p: 100, i: 0.01, d: 10.0}
+  joint4: {p: 100, i: 0.01, d: 10.0}
+  gripper: {p: 100, i: 0.01, d: 10.0}
+  gripper_sub: {p: 100, i: 0.01, d: 10.0} 

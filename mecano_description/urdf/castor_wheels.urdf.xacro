@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="mecano" name = "castor_wheels">
+    
+    <xacro:macro name="castor_wheel_dimension">
+        <cylinder length="0.012" radius="0.0145"/>
+    </xacro:macro>
+
+    <xacro:macro name="castor_wheels">
+            <link name="castor_left">
+                    <visual>
+                        <geometry>
+                            <box size="0.02 0.02 0.01"/>
+                        </geometry>
+                        <material name="grey"/>
+                    </visual>           
+                    <collision>
+                        <geometry>
+                            <box size="0.02 0.02 0.01"/>
+                        </geometry>
+                    </collision>
+                    <inertial>
+                        <xacro:default_origin/>
+                        <mass value="0.1"/>
+                        <inertia ixx="0.00083" iyy="0.00083" izz="0.000167" ixy="0" ixz="0" iyz="0"/>
+                    </inertial>
+                </link>
+            
+                <joint name="castor_joint_left" type="continuous">
+                    <axis xyz="0 0 1"/>
+                    <parent link="left_foot"/>
+                    <child link="castor_left"/>
+                    <origin rpy="0 0 0" xyz="-0.10 0 -0.015"/>
+                </joint>
+            
+                <link name="castor_wheel_left">
+                    <visual>
+                        <geometry>
+                        <xacro:castor_wheel_dimension/>
+                        </geometry>
+                        <material name="grey"/>
+                    </visual>           
+                    <collision>
+                        <geometry>
+                        <xacro:castor_wheel_dimension/>
+                        </geometry>
+                    </collision>
+                    <inertial>
+                        <xacro:default_origin/>
+                        <mass value="0.05"/>
+                        <inertia ixx="3.22916666667e-06" iyy="3.22916666667e-06" izz="5.625e-06" ixy="0" ixz="0" iyz="0"/>
+                    </inertial>
+                </link>
+            
+                <joint name="castor_wheel_left_joint" type="continuous">
+                    <axis xyz="0 0 1"/>
+                    <parent link="castor_left"/>
+                    <child link="castor_wheel_left"/>
+                    <origin rpy="-1.5708 0 0" xyz="0.005 0 -0.005"/>
+                </joint>
+                
+                <link name="castor_right">
+                        <visual>
+                            <geometry>
+                                <box size="0.02 0.02 0.01"/>
+                            </geometry>
+                            <material name="grey"/>
+                        </visual>
+                
+                        <collision>
+                            <geometry>
+                                <box size="0.02 0.02 0.01"/>
+                            </geometry>
+                        </collision>
+                        <inertial>
+                            <xacro:default_origin/>
+                            <mass value="0.1"/>
+                            <inertia ixx="0.00083" iyy="0.00083" izz="0.000167" ixy="0" ixz="0" iyz="0"/>
+                        </inertial>
+                    </link>
+                
+                    <joint name="castor_joint_right" type="continuous">
+                        <axis xyz="0 0 1"/>
+                        <parent link="right_foot"/>
+                        <child link="castor_right"/>
+                        <origin rpy="0 0 0" xyz="-0.10 0 -0.015"/>
+                    </joint>
+                
+                    <link name="castor_wheel_right">
+                        <visual>
+                            <geometry>
+                            <xacro:castor_wheel_dimension/>
+                            </geometry>
+                            <material name="grey"/>
+                        </visual>           
+                        <collision>
+                            <geometry>
+                            <xacro:castor_wheel_dimension/>
+                            </geometry>
+                        </collision>
+                        <inertial>
+                            <xacro:default_origin/>
+                            <mass value="0.05"/>
+                            <inertia ixx="3.22916666667e-06" iyy="3.22916666667e-06" izz="5.625e-06" ixy="0" ixz="0" iyz="0"/>
+                        </inertial>
+                    </link>
+                
+                    <joint name="castor_wheel_right_joint" type="continuous">
+                        <axis xyz="0 0 1"/>
+                        <parent link="castor_right"/>
+                        <child link="castor_wheel_right"/>
+                        <origin rpy="-1.5708 0 0" xyz="0.005 0 -0.005"/>
+                    </joint> 
+    </xacro:macro>
+
+</robot>

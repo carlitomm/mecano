@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="mecano" name = "mecano" 
+>
+
+    #XACRO
+    <xacro:include filename="$(find mecano_description)/urdf/base_link.urdf.xacro"/>
+    <xacro:include filename="$(find mecano_description)/urdf/common.urdf.xacro"/>
+    <xacro:include filename="$(find mecano_description)/urdf/secod_floor.urdf.xacro"/>
+    <xacro:include filename="$(find mecano_description)/urdf/wheels.urdf.xacro"/>
+    <xacro:include filename="$(find mecano_description)/urdf/sensors.urdf.xacro"/>
+    <xacro:include filename="$(find mecano_description)/urdf/gazebo.urdf.xacro"/>
+    <xacro:include filename="$(find mecano_description)/urdf/castor_wheels.urdf.xacro"/>
+    <xacro:include filename="$(find mecano_description)/urdf/open_manipulator.urdf.xacro"/>
+    
+    #main links and joints of the robot
+    <xacro:base_link/>
+    <xacro:second_floor/>
+    <xacro:wheels/> 
+    <xacro:castor_wheels/>
+    <xacro:open_manipulator/>
+   
+    <xacro:gazebo_sim/>
+    #END OF the main links of the robot
+
+    #main sensors of the robot
+    <xacro:sensors/>
+
+
+</robot>

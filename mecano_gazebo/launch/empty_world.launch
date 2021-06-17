@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<launch>
+  <!--this file launch my empty world located in the cg_bot_description package-->
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false" />
+  <arg name="use_sim_time" default="true" />
+  <arg name="extra_gazebo_args" default="" />
+  <arg name="gui" default="true" />
+  <arg name="recording" default="false" />
+  <!-- Note that 'headless' is currently non-functional.  See gazebo_ros_pkgs issue #491 (-r arg does not disable
+       rendering, but instead enables recording). The arg definition has been left here to prevent breaking downstream
+       launch files, but it does nothing. -->
+  <arg name="headless" default="false" />
+  <arg name="debug" default="false" />
+  <arg name="physics" default="ode" />
+  <arg name="verbose" default="false" />
+  <arg name="world_name" default="/home/carlos/catkin_ws/src/mecano_metapackage/mecano_gazebo/world/empty.world" /> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+  <arg name="respawn_gazebo" default="false" />
+  <arg name="use_clock_frequency" default="false" />
+  <arg name="pub_clock_frequency" default="100" />
+
+  <!-- set use_sim_time flag -->
+  <param name="/use_sim_time" value="$(arg use_sim_time)" />
+
+  <!-- set command arguments -->
+  <arg unless="$(arg paused)" name="command_arg1" value="" />
+  <arg if="$(arg paused)" name="command_arg1" value="-u" />
+  <arg unless="$(arg recording)" name="command_arg2" value="" />
+  <arg if="$(arg recording)" name="command_arg2" value="-r" />
+  <arg unless="$(arg verbose)" name="command_arg3" value="" />
+  <arg if="$(arg verbose)" name="command_arg3" value="--verbose" />
+  <arg unless="$(arg debug)" name="script_type" value="gzserver" />
+  <arg if="$(arg debug)" name="script_type" value="debug" />
+
+  <!-- start gazebo server-->
+  <group if="$(arg use_clock_frequency)">
+    <param name="gazebo/pub_clock_frequency" value="$(arg pub_clock_frequency)" />
+  </group>
+  <node name="gazebo" pkg="gazebo_ros" type="$(arg script_type)" respawn="$(arg respawn_gazebo)" output="screen" args="$(arg command_arg1) $(arg command_arg2) $(arg command_arg3) -e $(arg physics) $(arg extra_gazebo_args) $(arg world_name)" />
+
+  <!-- start gazebo client -->
+  <group if="$(arg gui)">
+    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen" args="$(arg command_arg3)" />
+  </group>
+
+  <!--this is the robot-->
+  <!--param name="robot_description" textfile="$(find mecano_description)/robot/mecano_real.urdf.xacro" /-->
+  <param name="robot_description" command="$(find xacro)/xacro $(find mecano_description)/robot/mecano_real.urdf.xacro" />
+
+  
+  
+  
+  <arg name="x_pos" default="0.0" />
+  <arg name="y_pos" default="0.0" />
+  <arg name="z_pos" default="0.0" />
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model mecano -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos)" />
+  <rosparam 
+  file="/home/carlos/catkin_ws/src/mecano_metapackage/config/conf.yaml" 
+  command="load"></rosparam>
+
+  <rosparam 
+  file="/home/carlos/catkin_ws/src/mecano_metapackage/config/pid_config.yaml" 
+  command="load"></rosparam>
+
+  <node 
+  name="controller_spawner" 
+  pkg="controller_manager" 
+  type="spawner" 
+  respawn="false" 
+  output="screen" 
+  ns="/mecano" 
+  args="joint_state_controller joint1_position_controller joint2_position_controller"></node>
+  
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="FALSE" />
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+</launch>

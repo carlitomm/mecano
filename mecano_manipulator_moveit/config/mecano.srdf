@@ -1,0 +1,301 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="mecano">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="arm">
+        <joint name="joint1" />
+        <joint name="joint2" />
+        <joint name="joint3" />
+        <joint name="joint4" />
+    </group>
+    <group name="gripper">
+        <joint name="gripper_sub" />
+        <joint name="gripper" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="zero_pose" group="arm">
+        <joint name="joint1" value="0" />
+        <joint name="joint2" value="0" />
+        <joint name="joint3" value="0" />
+        <joint name="joint4" value="0" />
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="linear_gripper" parent_link="link5" group="gripper" />
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="open_manipulator_joint" type="fixed" parent_frame="second_floor" child_link="link1" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="base_link" link2="castor_left" reason="Never" />
+    <disable_collisions link1="base_link" link2="castor_right" reason="Never" />
+    <disable_collisions link1="base_link" link2="castor_wheel_left" reason="Never" />
+    <disable_collisions link1="base_link" link2="castor_wheel_right" reason="Never" />
+    <disable_collisions link1="base_link" link2="front_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="left_back_column" reason="Never" />
+    <disable_collisions link1="base_link" link2="left_foot" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="left_wheel" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="link1" reason="Never" />
+    <disable_collisions link1="base_link" link2="link2" reason="Never" />
+    <disable_collisions link1="base_link" link2="link3" reason="Never" />
+    <disable_collisions link1="base_link" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="base_link" link2="right_foot" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="right_wheel" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="second_floor" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="base_link" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="base_link" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="base_link" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="base_link" link2="ultrasound_front" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="ultrasound_left" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="ultrasound_right" reason="Adjacent" />
+    <disable_collisions link1="castor_left" link2="castor_right" reason="Never" />
+    <disable_collisions link1="castor_left" link2="castor_wheel_left" reason="Adjacent" />
+    <disable_collisions link1="castor_left" link2="castor_wheel_right" reason="Never" />
+    <disable_collisions link1="castor_left" link2="front_link" reason="Never" />
+    <disable_collisions link1="castor_left" link2="left_back_column" reason="Never" />
+    <disable_collisions link1="castor_left" link2="left_foot" reason="Adjacent" />
+    <disable_collisions link1="castor_left" link2="left_wheel" reason="Never" />
+    <disable_collisions link1="castor_left" link2="link1" reason="Never" />
+    <disable_collisions link1="castor_left" link2="link2" reason="Never" />
+    <disable_collisions link1="castor_left" link2="link3" reason="Never" />
+    <disable_collisions link1="castor_left" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="castor_left" link2="right_foot" reason="Never" />
+    <disable_collisions link1="castor_left" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="castor_left" link2="second_floor" reason="Never" />
+    <disable_collisions link1="castor_left" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="castor_left" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="castor_left" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="castor_left" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="castor_left" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="castor_left" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="castor_left" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="castor_right" link2="castor_wheel_left" reason="Never" />
+    <disable_collisions link1="castor_right" link2="castor_wheel_right" reason="Adjacent" />
+    <disable_collisions link1="castor_right" link2="front_link" reason="Never" />
+    <disable_collisions link1="castor_right" link2="left_back_column" reason="Never" />
+    <disable_collisions link1="castor_right" link2="left_foot" reason="Never" />
+    <disable_collisions link1="castor_right" link2="left_wheel" reason="Never" />
+    <disable_collisions link1="castor_right" link2="link1" reason="Never" />
+    <disable_collisions link1="castor_right" link2="link2" reason="Never" />
+    <disable_collisions link1="castor_right" link2="link3" reason="Never" />
+    <disable_collisions link1="castor_right" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="castor_right" link2="right_foot" reason="Adjacent" />
+    <disable_collisions link1="castor_right" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="castor_right" link2="second_floor" reason="Never" />
+    <disable_collisions link1="castor_right" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="castor_right" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="castor_right" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="castor_right" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="castor_right" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="castor_right" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="castor_right" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="castor_wheel_right" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="front_link" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="left_back_column" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="left_foot" reason="Default" />
+    <disable_collisions link1="castor_wheel_left" link2="left_wheel" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="link1" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="link2" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="link3" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="right_foot" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="second_floor" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="castor_wheel_left" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="front_link" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="left_back_column" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="left_foot" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="left_wheel" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="link1" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="link2" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="link3" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="right_foot" reason="Default" />
+    <disable_collisions link1="castor_wheel_right" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="second_floor" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="castor_wheel_right" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="end_effector_link" link2="gripper_link" reason="Never" />
+    <disable_collisions link1="end_effector_link" link2="gripper_link_sub" reason="Never" />
+    <disable_collisions link1="end_effector_link" link2="link3" reason="Never" />
+    <disable_collisions link1="end_effector_link" link2="link4" reason="Never" />
+    <disable_collisions link1="end_effector_link" link2="link5" reason="Adjacent" />
+    <disable_collisions link1="end_effector_link" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="front_link" link2="left_back_column" reason="Never" />
+    <disable_collisions link1="front_link" link2="left_foot" reason="Never" />
+    <disable_collisions link1="front_link" link2="left_wheel" reason="Never" />
+    <disable_collisions link1="front_link" link2="link1" reason="Never" />
+    <disable_collisions link1="front_link" link2="link2" reason="Never" />
+    <disable_collisions link1="front_link" link2="link3" reason="Never" />
+    <disable_collisions link1="front_link" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="front_link" link2="right_foot" reason="Never" />
+    <disable_collisions link1="front_link" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="front_link" link2="second_floor" reason="Never" />
+    <disable_collisions link1="front_link" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="front_link" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="front_link" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="front_link" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="front_link" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="front_link" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="front_link" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="gripper_link" link2="gripper_link_sub" reason="Never" />
+    <disable_collisions link1="gripper_link" link2="link4" reason="Never" />
+    <disable_collisions link1="gripper_link" link2="link5" reason="Adjacent" />
+    <disable_collisions link1="gripper_link_sub" link2="link4" reason="Never" />
+    <disable_collisions link1="gripper_link_sub" link2="link5" reason="Adjacent" />
+    <disable_collisions link1="left_back_column" link2="left_foot" reason="Adjacent" />
+    <disable_collisions link1="left_back_column" link2="left_wheel" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="link1" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="link2" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="link3" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="right_foot" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="second_floor" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="left_back_column" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="left_foot" link2="left_wheel" reason="Default" />
+    <disable_collisions link1="left_foot" link2="link1" reason="Never" />
+    <disable_collisions link1="left_foot" link2="link2" reason="Never" />
+    <disable_collisions link1="left_foot" link2="link3" reason="Never" />
+    <disable_collisions link1="left_foot" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="left_foot" link2="right_foot" reason="Never" />
+    <disable_collisions link1="left_foot" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="left_foot" link2="second_floor" reason="Never" />
+    <disable_collisions link1="left_foot" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="left_foot" link2="second_floor_column_left" reason="Default" />
+    <disable_collisions link1="left_foot" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="left_foot" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="left_foot" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="left_foot" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="left_foot" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="link1" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="link2" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="link3" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="right_foot" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="second_floor" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="left_wheel" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="link1" link2="link2" reason="Adjacent" />
+    <disable_collisions link1="link1" link2="link3" reason="Never" />
+    <disable_collisions link1="link1" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="link1" link2="right_foot" reason="Never" />
+    <disable_collisions link1="link1" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="link1" link2="second_floor" reason="Adjacent" />
+    <disable_collisions link1="link1" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="link1" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="link1" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="link1" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="link1" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="link1" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="link1" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="link2" link2="link3" reason="Adjacent" />
+    <disable_collisions link1="link2" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="link2" link2="right_foot" reason="Never" />
+    <disable_collisions link1="link2" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="link2" link2="second_floor" reason="Never" />
+    <disable_collisions link1="link2" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="link2" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="link2" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="link2" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="link2" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="link2" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="link2" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="link3" link2="link4" reason="Adjacent" />
+    <disable_collisions link1="link3" link2="right_back_column" reason="Never" />
+    <disable_collisions link1="link3" link2="right_foot" reason="Never" />
+    <disable_collisions link1="link3" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="link3" link2="second_floor" reason="Never" />
+    <disable_collisions link1="link3" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="link3" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="link3" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="link3" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="link3" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="link3" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="link3" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="link4" link2="link5" reason="Adjacent" />
+    <disable_collisions link1="link4" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="right_foot" reason="Adjacent" />
+    <disable_collisions link1="right_back_column" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="second_floor" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="right_back_column" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="right_foot" link2="right_wheel" reason="Default" />
+    <disable_collisions link1="right_foot" link2="second_floor" reason="Never" />
+    <disable_collisions link1="right_foot" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="right_foot" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="right_foot" link2="second_floor_column_right" reason="Default" />
+    <disable_collisions link1="right_foot" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="right_foot" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="right_foot" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="right_foot" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="right_wheel" link2="second_floor" reason="Never" />
+    <disable_collisions link1="right_wheel" link2="second_floor_back" reason="Never" />
+    <disable_collisions link1="right_wheel" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="right_wheel" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="right_wheel" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="right_wheel" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="right_wheel" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="right_wheel" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="second_floor" link2="second_floor_back" reason="Adjacent" />
+    <disable_collisions link1="second_floor" link2="second_floor_column_left" reason="Adjacent" />
+    <disable_collisions link1="second_floor" link2="second_floor_column_right" reason="Adjacent" />
+    <disable_collisions link1="second_floor" link2="second_floor_front" reason="Adjacent" />
+    <disable_collisions link1="second_floor" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="second_floor" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="second_floor" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="second_floor_back" link2="second_floor_column_left" reason="Never" />
+    <disable_collisions link1="second_floor_back" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="second_floor_back" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="second_floor_back" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="second_floor_back" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="second_floor_back" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="second_floor_column_left" link2="second_floor_column_right" reason="Never" />
+    <disable_collisions link1="second_floor_column_left" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="second_floor_column_left" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="second_floor_column_left" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="second_floor_column_left" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="second_floor_column_right" link2="second_floor_front" reason="Never" />
+    <disable_collisions link1="second_floor_column_right" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="second_floor_column_right" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="second_floor_column_right" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="second_floor_front" link2="ultrasound_front" reason="Never" />
+    <disable_collisions link1="second_floor_front" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="second_floor_front" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="ultrasound_front" link2="ultrasound_left" reason="Never" />
+    <disable_collisions link1="ultrasound_front" link2="ultrasound_right" reason="Never" />
+    <disable_collisions link1="ultrasound_left" link2="ultrasound_right" reason="Never" />
+</robot>

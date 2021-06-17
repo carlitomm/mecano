@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+	
+	<arg name="model" default="$(find mecano_description)/urdf/mecano_real.urdf"/>
+
+	<param name="robot_description"  command="$(find xacro)/xacro $(find mecano_description)/robot/mecano_real.urdf.xacro"/>
+
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+		<param name="use_gui" value="FALSE"/>
+	</node>
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find mecano_description)/rviz_config/rviz.rviz"/>
+
+</launch>

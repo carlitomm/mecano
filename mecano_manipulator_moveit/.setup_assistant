@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: mecano_description
+    relative_path: robot/mecano_real.urdf.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/mecano.srdf
+  CONFIG:
+    author_name: Carlos
+    author_email: cmiguelezmachado@gmail.com
+    generated_timestamp: 1592867448
